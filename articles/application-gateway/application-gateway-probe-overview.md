@@ -39,12 +39,14 @@ If the default probe check fails for server A, the application gateway removes i
 
 |Probe property | Value | Description|
 |---|---|---|
-| Probe URL| http://127.0.0.1:\<port\>/ | URL path |
+| Protocol | http or https | Protocol to use in the request headers when probing. The value defined in the back-end HTTP settings will be used. |
+| Host | 127.0.0.1 | Host name that will be used in the request headers when probing. Note that this is only to control the request headers. The actual request will be sent to the hosts defined in the back-end HTTP settings. |
+| Path | / | The path that will be probed. |
 | Interval | 30 | Probe interval in seconds |
 | Time-out  | 30 | Probe time-out in seconds |
 | Unhealthy threshold | 3 | Probe retry count. The back-end server is marked down after the consecutive probe failure count reaches the unhealthy threshold. |
 
-The default probe looks only at http://127.0.0.1:\<port\> to determine health status. If you need to configure the health probe to go to a custom URL or modify any other settings, you must use custom probes as described in the following steps.
+The default probe looks only at http://\<backend-host\>:\<backend-port\>/ to determine health status. If you need to configure the health probe to go to a custom URL or modify any other settings, you must use custom probes as described in the following steps.
 
 ## Custom health probe
 
@@ -57,15 +59,15 @@ The following table provides definitions for the properties of a custom health p
 |Probe property| Description|
 |---|---|
 | Name | Name of the probe. This name is used to refer to the probe in back-end HTTP settings. |
-| Protocol | Protocol used to send the probe. The probe will use the protocol defined in the back-end HTTP settings |
-| Host |  Host name to send the probe. Applicable only when multi-site is configured on Application Gateway, otherwise use '127.0.0.1'. This is different from VM host name. |
+| Protocol | Protocol to use in the request headers when probing. Must match the protocol defined in the back-end HTTP settings. |
+| Host |  Host name to use in the request headers when probing. For example 'host1.contoso.com' or '10.60.0.80'. Applicable only when multi-site is configured on Application Gateway, otherwise use '127.0.0.1'. This is different from VM host name. |
 | Path | Relative path of the probe. The valid path starts from '/'. |
 | Interval | Probe interval in seconds. This is the time interval between two consecutive probes.|
 | Time-out | Probe time-out in seconds. The probe is marked as failed if a valid response is not received within this time-out period. |
 | Unhealthy threshold | Probe retry count. The back-end server is marked down after the consecutive probe failure count reaches the unhealthy threshold. |
 
 > [AZURE.IMPORTANT] If Application Gateway is configured for a single site, by default the Host name should be specified as '127.0.0.1', unless otherwise configured in custom probe.
-For reference a custom probe is sent to \<protocol\>://\<host\>:\<port\>\<path\>.
+For reference a custom probe is sent to \<protocol\>://\<backend-host\>:\<backend-port\>\<path\>.
 
 ## Next steps
 
