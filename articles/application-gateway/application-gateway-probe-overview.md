@@ -39,7 +39,7 @@ If the default probe check fails for server A, the application gateway removes i
 
 |Probe property | Value | Description|
 |---|---|---|
-| Protocol | http or https | Protocol to use in the request headers when probing. The value defined in the back-end HTTP settings will be used. |
+| Protocol | http or https | Protocol used to send the probe. The value defined in the back-end HTTP settings will be used. |
 | Host | 127.0.0.1 | Host name that will be used in the request headers when probing. Note that this is only to control the request headers. The actual request will be sent to the hosts defined in the back-end HTTP settings. |
 | Path | / | The path that will be probed. |
 | Interval | 30 | Probe interval in seconds |
@@ -59,7 +59,7 @@ The following table provides definitions for the properties of a custom health p
 |Probe property| Description|
 |---|---|
 | Name | Name of the probe. This name is used to refer to the probe in back-end HTTP settings. |
-| Protocol | Protocol to use in the request headers when probing. Must match the protocol defined in the back-end HTTP settings. |
+| Protocol | Protocol used to send the probe. Must match the protocol defined in the back-end HTTP settings. |
 | Host |  Host name to use in the request headers when probing. For example 'host1.contoso.com' or '10.60.0.80'. Applicable only when multi-site is configured on Application Gateway, otherwise use '127.0.0.1'. This is different from VM host name. |
 | Path | Relative path of the probe. The valid path starts from '/'. |
 | Interval | Probe interval in seconds. This is the time interval between two consecutive probes.|
